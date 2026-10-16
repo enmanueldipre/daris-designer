@@ -1,46 +1,398 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daris Designer | Alquileres y Decoraciones</title><style>
-:root{--rose:#a63b65;--pink:#fff0f4;--gold:#b58b48;--ink:#352b30;--muted:#786c71;--line:#eedce2}*{box-sizing:border-box}body{margin:0;background:#fffafc;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}header{background:white;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}.bar{max-width:1180px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-family:Georgia,serif;font-size:28px;color:var(--rose);font-weight:bold}.brand small{display:block;font:11px system-ui;letter-spacing:2px;color:var(--gold);text-align:center}.nav{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid var(--rose);border-radius:12px;padding:10px 16px;background:var(--rose);color:white;font-weight:650}.btn.secondary{background:white;color:var(--rose)}.btn.gold{background:var(--gold);border-color:var(--gold)}.btn:disabled{opacity:.5;cursor:not-allowed}.hero{background:linear-gradient(100deg,rgba(52,27,36,.83),rgba(80,36,49,.20)),url('assets/17D1A048-D683-44E9-935C-672F6401CE7A.jpeg') center 46%/cover;min-height:390px;display:flex;align-items:center}.hero .inner{max-width:1180px;margin:auto;padding:55px 25px;color:white;width:100%}.hero h1{font:clamp(35px,5vw,62px) Georgia,serif;max-width:650px;margin:8px 0}.hero p{max-width:560px;line-height:1.6}.container{max-width:1180px;margin:auto;padding:36px 22px}h2{font:32px Georgia,serif;color:#74344e;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 22px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}.card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 25px #5a27300c}.card img{height:195px;width:100%;object-fit:cover}.card .content{padding:16px}.card h3{font-size:17px;margin:0 0 9px}.price{color:var(--rose);font-weight:800;font-size:20px}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:var(--pink);color:#8a4960;font-size:12px}.card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px}.panel{background:white;border:1px solid var(--line);padding:24px;border-radius:18px;margin:20px 0}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.field label{font-size:13px;font-weight:650}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #d9cbd0;border-radius:10px;background:white}.field textarea{min-height:75px}.hidden{display:none!important}.notice{padding:12px 15px;background:#fff5dc;border-left:4px solid var(--gold);border-radius:8px;font-size:14px;margin:15px 0}.success{background:#e8f7ed;border-left-color:#3d9360}.cartrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.cartrow input{width:60px;padding:8px;border:1px solid #ccc;border-radius:8px}.total{font-size:24px;color:var(--rose);font-weight:800;text-align:right;margin:15px 0}footer{background:#422b35;color:white;padding:35px 20px;margin-top:50px}footer .inner{max-width:1180px;margin:auto;line-height:1.8}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px;font-size:14px}th{background:var(--pink)}.actions{display:flex;gap:8px;flex-wrap:wrap}.pill{border-radius:20px;padding:5px 10px;background:#fff0cf;font-size:12px}.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.gallery img{width:100%;height:185px;object-fit:cover;border-radius:12px}.small{font-size:12px;color:var(--muted)}.modal{position:fixed;inset:0;background:#24171cb5;display:grid;place-items:center;z-index:10;padding:20px}.modalbox{background:white;border-radius:20px;padding:25px;width:min(500px,100%);max-height:90vh;overflow:auto}.topline{display:flex;justify-content:space-between;align-items:center}.link{background:none;border:0;color:var(--rose);text-decoration:underline}.print-only{display:none}@media(max-width:650px){.bar{align-items:flex-start;flex-direction:column}.hero{min-height:330px}.two{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:150px}.container{padding:24px 15px}.brand{font-size:24px}}@media print{header,.hero,.container,footer,.modal,.no-print{display:none!important}.print-only{display:block!important;color:#111;font:12px Arial;padding:15px}.print-only h1{font-size:26px}.print-only table td,.print-only table th{border:1px solid #bbb}.signature{display:flex;justify-content:space-between;margin-top:90px}}
-</style></head><body>
-<header><div class="bar"><div class="brand">Daris Designer<small>EVENTOS & DECORACIONES</small></div><div class="nav"><button class="btn secondary" onclick="go('catalogo')">Catálogo</button><button class="btn secondary" onclick="go('carrito')">Mi pedido <span id="count">0</span></button><button class="btn secondary" onclick="showAdmin()">Administración</button><button class="btn" onclick="go('carrito')">Solicitar por WhatsApp</button><span id="accountBtn" class="hidden"></span></div></div></header>
-<section class="hero"><div class="inner"><span style="letter-spacing:3px;color:#f3dba8">CELEBRACIONES CON ESTILO</span><h1>Detalles que hacen inolvidable tu evento</h1><p>Alquila pedestales, bases, accesorios y decoración para tus momentos especiales. Explora el catálogo y solicita tu alquiler en línea.</p><button class="btn gold" onclick="go('catalogo')">Explorar artículos →</button></div></section>
-<main><section class="container" id="catalogo"><h2>Catálogo de alquileres</h2><p class="sub">Precios en pesos dominicanos por 1 día. Toda solicitud está sujeta a disponibilidad y aprobación manual.</p><div class="field" style="max-width:420px"><label>Buscar artículos</label><input id="searchProducts" placeholder="Escribe un producto o categoría" oninput="renderProducts()"></div><div id="products" class="grid"></div><div class="notice">Las imágenes de montajes muestran ejemplos de decoración. Algunos artículos individuales pueden aparecer dentro de una composición; confirma el artículo exacto antes de alquilar.</div></section>
-<section class="container" id="carrito"><h2>Mi solicitud de alquiler</h2><p class="sub">Selecciona artículos y envía tu solicitud por WhatsApp. Ninguna solicitud queda aprobada automáticamente.</p><div class="panel"><div id="cartItems"></div><div class="total" id="subtotal"></div><div class="notice">Subtotal de artículos solamente. Transporte según dirección, garantía variable e impuestos aplicables se determinarán antes de la confirmación.</div><div class="two"><div class="field"><label>Fecha del evento</label><input type="date" id="eventDate"></div><div class="field"><label>Fecha de devolución</label><input type="date" id="returnDate"></div><div class="field"><label>Entrega o recogida</label><select id="delivery"><option value="Entrega a domicilio">Entrega a domicilio (cotización)</option><option value="Recogida acordada">Recogida acordada</option></select></div><div class="field"><label>Dirección del evento</label><input id="eventAddress" placeholder="Sector, calle, número y municipio"></div></div><div class="field"><label>Detalles adicionales</label><textarea id="notes" placeholder="Horario, indicaciones, decoración deseada..."></textarea></div><div class="two"><div class="field"><label>Tu nombre</label><input id="clientName" placeholder="Nombre para la solicitud"></div><div class="field"><label>Teléfono de contacto</label><input id="clientPhone" placeholder="Tu número"></div></div><div class="actions"><button class="btn" onclick="sendWhatsApp('18298587288')">Enviar a WhatsApp 829-858-7288</button><button class="btn secondary" onclick="sendWhatsApp('18098759895')">Enviar a WhatsApp 809-875-9895</button></div><p class="small">WhatsApp abrirá un mensaje listo para enviar. Debes pulsar Enviar allí. La solicitud requiere confirmación y aprobación manual.</p></div></section>
-<section class="container" id="myorders"><h2>Mis pedidos</h2><div class="panel" id="ordersCustomer">Las solicitudes enviadas por WhatsApp se confirman directamente con Daris Designer. El historial compartido estará disponible cuando se conecte el panel en línea.</div></section>
-<section class="container"><h2>Inspiración para tus eventos</h2><p class="sub">Ideas y artículos decorativos. Consulta disponibilidad y opciones para tu evento.</p><div class="gallery" id="inspiration"></div></section>
-<section class="container hidden" id="admin"><h2>Panel administrativo <span class="tag">DEMOSTRACIÓN</span></h2><div class="notice">MODO LOCAL: las ediciones se guardan solo en este navegador y no se sincronizan. Este panel NO es privado; antes de publicar para clientes se requiere autenticación y una base de datos.</div><div class="panel"><h3>Solicitudes recibidas en este navegador</h3><div id="adminOrders"></div></div><div class="panel"><h3>Fotos de inspiración</h3><p class="small">Puedes quitar fotos o agregar nuevas en este navegador. Para publicarlas a todos será necesario actualizar la web.</p><input id="inspirationPhoto" type="file" accept="image/*" onchange="addInspiration(this.files[0])"><div id="adminInspiration" class="grid"></div></div><div class="panel"><h3>Agregar artículo</h3><div class="two"><div class="field"><label>Nombre del artículo</label><input id="newName" placeholder="Ej. Mesa decorativa"></div><div class="field"><label>Categoría</label><input id="newCategory" placeholder="Ej. Mesas"></div><div class="field"><label>Precio por día (RD$)</label><input type="number" min="0" id="newPrice" placeholder="Dejar vacío si falta definir"></div><div class="field"><label>Existencias</label><input type="number" min="0" id="newQty" placeholder="Dejar vacío si falta definir"></div></div><div class="field"><label>Colores o modelos (separados por coma)</label><input id="newVariants" placeholder="Ej. blanco, rosa, dorado"></div><div class="field"><label>Fotografía (se guarda solo en este navegador de prueba)</label><input type="file" accept="image/*" id="newPhoto"></div><button class="btn" onclick="createProduct()">Agregar producto</button></div><div class="panel"><h3>Inventario y precios</h3><div id="inventory"></div></div></section></main>
-<footer><div class="inner"><strong style="font:26px Georgia,serif">Daris Designer</strong><div>RNC: 130630028</div><div>C/ Dionisio Troncoso 58, Esq., Higüey 23000, República Dominicana</div><div>829-858-7288 · 809-875-9895</div><div>daritzaguilamo@gmail.com · enmanueldipre5@gmail.com</div><div class="small" style="color:#f1dbe5">Catálogo de muestra: las solicitudes se envían manualmente por WhatsApp; no se reciben pagos ni se envían correos automáticos.</div></div></footer>
-<div id="authModal" class="modal hidden"><div class="modalbox"><div class="topline"><h2 id="authTitle">Crear cuenta</h2><button class="link" onclick="closeAuth()">Cerrar ✕</button></div><div class="notice">Acceso simulado para pruebas. No introduzcas contraseñas que uses en otros sitios ni datos de cédula reales.</div><div id="registerFields"><div class="field"><label>Nombre completo</label><input id="regName"></div><div class="field"><label>Cédula (usar dato ficticio en demo)</label><input id="regId"></div><div class="field"><label>Teléfono</label><input id="regPhone"></div><div class="field"><label>Dirección</label><input id="regAddress"></div></div><div class="field"><label>Correo electrónico</label><input type="email" id="regEmail"></div><div class="field"><label>Contraseña de demostración</label><input type="password" id="regPass"></div><button class="btn" id="authSubmit" onclick="authSubmit()">Crear cuenta</button><p><button class="link" id="authToggle" onclick="toggleAuth()">Ya tengo una cuenta</button></p></div></div>
-<div class="print-only" id="printDoc"></div>
-<script>
-const initial=[['Tapete redondo de fibra natural',350,1,'5db9002b-d376-4d8a-9a49-9477822b23f3.jpeg','Accesorios'],['Pedestal cilíndrico rosa',800,null,'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg','Pedestales'],['Pedestal cilíndrico amarillo',600,1,'E3597FD9-F9C2-4967-A934-42A96AF172BC.jpeg','Pedestales'],['Pedestal cilíndrico estilo madera',800,1,'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg','Pedestales'],['Estructura circular dorada para flores',1000,1,'IMG_5592.jpeg','Estructuras'],['Base para pastel amarilla',200,1,'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg','Bases'],['Base decorativa blanca',200,1,'E3597FD9-F9C2-4967-A934-42A96AF172BC.jpeg','Bases'],['Número iluminado para cumpleaños',750,1,'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg','Accesorios'],['Arreglo floral decorativo',1200,1,'IMG_5592.jpeg','Flores'],['Planta decorativa con maceta',500,1,'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg','Plantas']];
-const extras=[["Juego de tres elevadores amarillos", "Elevadores", "597CD501-9A7E-4F38-9956-505E1186255C.jpeg"], ["Letrero luminoso Let’s Party", "Letreros", "AF0F8750-096A-49C9-A30B-396C21E0041A.jpeg"], ["Mampara arqueada de madera", "Mamparas", "E9F9DE6F-1565-4964-BAD9-1F48FB855477.jpeg"], ["Juego de dos mesas de madera", "Mesas", "D500F485-C248-4340-853C-7317194D8689.jpeg"], ["Elevadores dorados con cristal", "Elevadores", "242CE58D-9FDD-4ED5-8F70-C84BC4A7845B.jpeg"], ["Pedestales geométricos dorados", "Pedestales", "A9003747-375D-418C-8511-2B355D15962E.jpeg"], ["Elevadores de postres azul cielo", "Elevadores", "8DC11CF9-217F-49DA-9065-639647FDE3D9.jpeg"], ["Estantería blanca tipo escalera", "Estanterías", "427A36F6-62F9-414D-9ECF-07643AA0CEFB.jpeg"], ["Cilindros blancos", "Cilindros", "A2B9B498-680E-4A2A-9BEC-DAEA77F0D17A.jpeg"], ["Cilindros acanalados de colores", "Cilindros", "5E2ADB56-B1E1-4D7E-8747-1EB3F0E4CAF3.jpeg"], ["Elevadores de postres rosados", "Elevadores", "792E4CD7-38FE-43B1-A43B-CA9593F8845E.jpeg"], ["Cilindros acanalados rosados", "Cilindros", "E0598BB2-44B9-4742-8CD8-227B66B60FBF.jpeg"], ["Número 15 luminoso", "Números luminosos", "8B980511-05F2-4DBC-BEB3-B5F939E6825D.jpeg"], ["Mampara blanca arqueada", "Mamparas", "A9712AEF-4CD4-4B92-8485-016EB795472E.jpeg"], ["Mampara blanca con arcos", "Mamparas", "6DB17B12-1497-4C41-B193-C41B081E5C61.jpeg"], ["Cilindros espejados plateados", "Cilindros", "C3FEB361-081C-427A-905F-B47907E5FFC6.jpeg"], ["Cilindros decorativos dorados", "Cilindros", "7DBC9502-B896-41B8-B5F3-62A73DB0BEA3.jpeg"]];
-const $=id=>document.getElementById(id),money=n=>'RD$ '+Number(n).toLocaleString('en-US'),get=(k,d)=>{try{return JSON.parse(localStorage.getItem('daris_demo_'+k))??d}catch{return d}},put=(k,v)=>localStorage.setItem('daris_demo_'+k,JSON.stringify(v));let products=get('products',initial.map((a,i)=>({id:i+1,name:a[0],price:a[1],qty:a[2],img:["5db9002b-d376-4d8a-9a49-9477822b23f3.jpeg", "792E4CD7-38FE-43B1-A43B-CA9593F8845E.jpeg", "597CD501-9A7E-4F38-9956-505E1186255C.jpeg", "A9003747-375D-418C-8511-2B355D15962E.jpeg", "IMG_5592.jpeg", "2096F4B4-E9CA-4B56-A758-40A7E2DA6C12.jpeg", "427A36F6-62F9-414D-9ECF-07643AA0CEFB.jpeg", "8B980511-05F2-4DBC-BEB3-B5F939E6825D.jpeg", "IMG_5622.jpeg", "IMG_5601.jpeg"][i],category:a[4]})).concat(extras.map((a,i)=>({id:11+i,name:a[0],price:null,qty:null,img:a[2],category:a[1]})))),cart={},user=null,authMode='register';let orders=get('orders',[]);
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daris Designer | Alquileres y Decoraciones</title>
+<style>
+:root{--rose:#a63b65;--pink:#fff0f4;--gold:#b58b48;--ink:#352b30;--muted:#786c71;--line:#eedce2}
+*{box-sizing:border-box}
+body{margin:0;background:#fffafc;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:white;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
+.bar{max-width:1180px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:Georgia,serif;font-size:28px;color:var(--rose);font-weight:bold}
+.brand small{display:block;font:11px system-ui;letter-spacing:2px;color:var(--gold);text-align:center}
+.nav{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:1px solid var(--rose);border-radius:12px;padding:10px 16px;background:var(--rose);color:white;font-weight:650}
+.btn.secondary{background:white;color:var(--rose)}
+.btn.gold{background:var(--gold);border-color:var(--gold)}
+.btn.danger{background:#a83636;border-color:#a83636}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.hero{background:linear-gradient(100deg,rgba(52,27,36,.83),rgba(80,36,49,.20)),url('assets/17D1A048-D683-44E9-935C-672F6401CE7A.jpeg') center 46%/cover;min-height:390px;display:flex;align-items:center}
+.hero .inner{max-width:1180px;margin:auto;padding:55px 25px;color:white;width:100%}
+.hero h1{font:clamp(35px,5vw,62px) Georgia,serif;max-width:650px;margin:8px 0}
+.hero p{max-width:560px;line-height:1.6}
+.container{max-width:1180px;margin:auto;padding:36px 22px}
+h2{font:32px Georgia,serif;color:#74344e;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 25px #5a27300c}
+.card img{height:195px;width:100%;object-fit:cover;background:#f4ecef}
+.card .content{padding:16px}
+.card h3{font-size:17px;margin:0 0 9px}
+.price{color:var(--rose);font-weight:800;font-size:20px}
+.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:var(--pink);color:#8a4960;font-size:12px}
+.card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px}
+.panel{background:white;border:1px solid var(--line);padding:24px;border-radius:18px;margin:20px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-size:13px;font-weight:650}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #d9cbd0;border-radius:10px;background:white}
+.field textarea{min-height:75px}
+.hidden{display:none!important}
+.notice{padding:12px 15px;background:#fff5dc;border-left:4px solid var(--gold);border-radius:8px;font-size:14px;margin:15px 0}
+.success{background:#e8f7ed;border-left-color:#3d9360}
+.error{background:#ffe7e7;border-left-color:#b53c3c}
+.cartrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cartrow input{width:60px;padding:8px;border:1px solid #ccc;border-radius:8px}
+.total{font-size:24px;color:var(--rose);font-weight:800;text-align:right;margin:15px 0}
+footer{background:#422b35;color:white;padding:35px 20px;margin-top:50px}
+footer .inner{max-width:1180px;margin:auto;line-height:1.8}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px;font-size:14px;vertical-align:top}
+th{background:var(--pink)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gallery img{width:100%;height:185px;object-fit:cover;border-radius:12px}
+.small{font-size:12px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#24171cb5;display:grid;place-items:center;z-index:10;padding:20px}
+.modalbox{background:white;border-radius:20px;padding:25px;width:min(540px,100%);max-height:90vh;overflow:auto}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.link{background:none;border:0;color:var(--rose);text-decoration:underline}
+.admin-photo{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#f4ecef}
+.switchline{display:flex;gap:8px;align-items:center}
+.status{margin:10px 0;color:var(--muted);font-size:14px}
+@media(max-width:650px){.bar{align-items:flex-start;flex-direction:column}.hero{min-height:330px}.two{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:150px}.container{padding:24px 15px}.brand{font-size:24px}table{min-width:900px}}
+</style>
+</head>
+<body>
 
-const newCatalog=[{"name": "Decoración marina: corales y caballitos", "img": "8D99FF80-F8E3-4D0A-A94F-259ADAF0E8E9.jpeg", "category": "Temáticas", "price": null, "qty": null, "variants": []}, {"name": "Cubos decorativos de granja", "img": "9D9D549B-E0AD-4FB9-A5AC-197819C6C0A3.jpeg", "category": "Temáticas", "price": null, "qty": null, "variants": []}, {"name": "Cilindro acanalado crema", "img": "9DC1D43F-D35C-4328-BE65-8CF1E87EC2B2.jpeg", "category": "Cilindros", "price": null, "qty": null, "variants": []}, {"name": "Bandeja de tres niveles blanca", "img": "5C239E95-C45A-4AE1-AE3F-E8156142ABF2.jpeg", "category": "Bandejas", "price": null, "qty": null, "variants": []}, {"name": "Bandeja plateada con cristales", "img": "7A2E0323-C725-4C7C-B9C0-7EAF2FDC0658.jpeg", "category": "Bandejas", "price": null, "qty": null, "variants": []}, {"name": "Candelabro de cristal dorado", "img": "14EDFF00-E29E-4E52-860E-9D2419DA9FCA.jpeg", "category": "Candelabros", "price": null, "qty": null, "variants": []}, {"name": "Elevador de postres de colores", "img": "95A2516F-370E-4CE3-8FEC-7D82608D990A.jpeg", "category": "Elevadores", "price": null, "qty": null, "variants": ["Crema", "Rosado", "Amarillo", "Otro color (consultar)"]}, {"name": "Elevadores dorados con espejo", "img": "5A126F38-2407-403E-9560-08EF747E3198.jpeg", "category": "Elevadores", "price": null, "qty": null, "variants": ["Grande", "Mediano", "Pequeño"]}, {"name": "Alfombras decorativas", "img": "B940AA3E-49AB-40B1-B607-89FB77294BDE.jpeg", "category": "Alfombras", "price": null, "qty": null, "variants": ["Gris", "Negro", "Turquesa", "Amarillo", "Rosado", "Morado", "Rojo", "Blanco", "Beige", "Naranja", "Gris claro", "Gris oscuro"]}, {"name": "Sillas infantiles", "img": "7CC8185E-6745-47DE-89E7-58430A0CE69A.jpeg", "category": "Sillas", "price": null, "qty": null, "variants": ["Rojo", "Beige", "Azul", "Blanco"]}, {"name": "Casita metálica decorativa", "img": "EDB83E9C-CA2A-47D9-ACB9-4600752C985C.jpeg", "category": "Accesorios", "price": null, "qty": null, "variants": []}, {"name": "Bases rústicas de madera", "img": "A68E85B4-C0AE-424A-A6E5-787A7817A882(1).jpeg", "category": "Bases", "price": null, "qty": null, "variants": []}, {"name": "Plantas decorativas", "img": "0B9672AA-2CE5-46B2-B4F1-D572F15F9C3C(1).jpeg", "category": "Plantas", "price": null, "qty": null, "variants": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]}];
-if(!get('catalog_upgrade_v2',false)){let id=Math.max(...products.map(p=>p.id),0);for(let p of newCatalog){if(!products.some(x=>x.name===p.name))products.push({...p,id:++id})}for(let p of products){if(p.name==='Elevadores de postres rosados')p.variants=['Rosado','Amarillo','Blanco','Otro color (consultar)'];if(p.name==='Cilindros acanalados de colores')p.variants=['Blanco','Rosado','Amarillo','Azul','Otro color (consultar)']}put('products',products);put('catalog_upgrade_v2',true)}
-function imageSrc(s){return s?.startsWith('data:image/')?s:'assets/'+encodeURIComponent(s||'')}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function go(id){$(id).scrollIntoView({behavior:'smooth'})}function renderProducts(){let term=($('searchProducts')?.value||'').toLowerCase();$('products').innerHTML=products.filter(p=>(p.name+' '+p.category).toLowerCase().includes(term)).map(p=>`<article class="card"><img src="${imageSrc(p.img)}" alt="${esc(p.name)}"><div class="content"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3><div class="price">${(p.price===null?'Precio por definir':money(p.price))} <span class="small">/ día</span></div><p class="small">${p.qty===null?'Existencia por confirmar':`Existencias registradas: ${p.qty}`}</p><div class="field"><label>Color / modelo</label><select id="variant_${p.id}">${(p.variants?.length?p.variants:['Por confirmar']).map(v=>`<option>${esc(v)}</option>`).join('')}</select></div><div class="foot"><span class="small">Disponibilidad por confirmar</span><button class="btn" onclick="add(${p.id})">Agregar +</button></div></div></article>`).join('')}
-function add(id){let p=products.find(x=>x.id===id);if(!p)return;let variant=$('variant_'+id)?.value||'Por confirmar';let key=id+'|'+variant;cart[key]=(cart[key]||0)+1;renderCart()}
-function renderCart(){let entries=Object.entries(cart).filter(([,q])=>q>0),sum=entries.reduce((s,[key,q])=>{let p=products.find(x=>x.id===Number(key.split('|')[0]));return s+(p?.price||0)*q},0);$('count').textContent=entries.reduce((s,[,q])=>s+q,0);$('cartItems').innerHTML=entries.length?entries.map(([key,q])=>{let p=products.find(x=>x.id===Number(key.split('|')[0]));if(!p)return '';return `<div class="cartrow"><div><b>${esc(p.name)}</b><div class="small">${esc(key.split('|').slice(1).join('|'))} · ${p.price===null?'Precio por definir':money(p.price)}/día</div></div><div><input aria-label="Cantidad" type="number" min="0" value="${q}" onchange="setQty('${key}',this.value)"> <button class="link" onclick="setQty('${key}',0)">Quitar</button></div></div>`}).join(''):'Tu carrito está vacío. Agrega artículos desde el catálogo.';$('subtotal').textContent='Subtotal orientativo por día: '+money(sum);}
-function setQty(key,v){let n=Math.max(0,Math.floor(Number(v)||0));if(n)cart[key]=n;else delete cart[key];renderCart()}
-function sendWhatsApp(number){let entries=Object.entries(cart).filter(([,q])=>q>0);if(!entries.length)return alert('Agrega al menos un artículo.');let name=$('clientName').value.trim(),phone=$('clientPhone').value.trim();if(!name||!phone)return alert('Escribe tu nombre y teléfono.');if(!$('eventDate').value||!$('returnDate').value||!$('eventAddress').value.trim())return alert('Completa las fechas y dirección del evento.');if($('returnDate').value<$('eventDate').value)return alert('Revisa las fechas.');let lines=entries.map(([key,q])=>{let p=products.find(x=>x.id===Number(key.split('|')[0]));return '- '+p.name+' | '+key.split('|').slice(1).join('|')+' | cantidad '+q+' | '+(p.price===null?'precio por confirmar':money(p.price)+'/día')});let msg=['Hola, Daris Designer. Solicito cotización de alquiler (pendiente de aprobación).','Nombre: '+name,'Teléfono: '+phone,'Evento: '+$('eventDate').value,'Devolución: '+$('returnDate').value,'Modalidad: '+$('delivery').value,'Dirección: '+$('eventAddress').value,'Artículos:',...lines,'Notas: '+$('notes').value,'Favor confirmar colores, existencias, precio final y aprobación.'].join('\n');window.open('https://wa.me/'+number+'?text='+encodeURIComponent(msg),'_blank','noopener');}
-function openAuth(){if(user){if(confirm('Sesión de demostración: '+user.name+'\n¿Cerrar sesión?')){user=null;renderSession()}return}$('authModal').classList.remove('hidden')}function closeAuth(){$('authModal').classList.add('hidden')}function toggleAuth(){authMode=authMode==='register'?'login':'register';$('registerFields').classList.toggle('hidden',authMode==='login');$('authTitle').textContent=authMode==='register'?'Crear cuenta':'Iniciar sesión';$('authSubmit').textContent=authMode==='register'?'Crear cuenta':'Entrar';$('authToggle').textContent=authMode==='register'?'Ya tengo una cuenta':'Crear una cuenta'}
-function authSubmit(){let email=$('regEmail').value.trim().toLowerCase(),pass=$('regPass').value;if(!email.includes('@')||pass.length<4)return alert('Introduce un correo y una contraseña de prueba de al menos 4 caracteres.');let users=get('users',[]);if(authMode==='register'){let name=$('regName').value.trim();if(!name||!$('regPhone').value.trim()||!$('regAddress').value.trim()||!$('regId').value.trim())return alert('Completa los datos de registro con información ficticia para la prueba.');if(users.some(x=>x.email===email))return alert('Ya existe una cuenta de prueba con ese correo.');let u={email,name,phone:$('regPhone').value,address:$('regAddress').value,cedula:$('regId').value,pass};users.push(u);put('users',users);user=u}else{user=users.find(x=>x.email===email&&x.pass===pass);if(!user)return alert('Credenciales de demostración incorrectas.')}closeAuth();renderSession();alert('Sesión de prueba iniciada. No es autenticación segura para producción.')}function renderSession(){$('accountBtn').textContent=user?'Salir: '+user.name.split(' ')[0]:'Crear cuenta / Entrar';renderCustomer()}
-function submitOrder(){if(!user){openAuth();return}let items=Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>({id:Number(id),qty:q,price:products.find(p=>p.id==id).price,name:products.find(p=>p.id==id).name}));if(!items.length)return alert('Agrega artículos primero.');if(!$('eventDate').value||!$('returnDate').value||!$('eventAddress').value.trim())return alert('Completa fechas y dirección del evento.');if($('returnDate').value<$('eventDate').value)return alert('La devolución no puede ser anterior al evento.');let days=Math.round((new Date($('returnDate').value+'T12:00')-new Date($('eventDate').value+'T12:00'))/86400000)+1;let order={id:'DD-'+Date.now().toString().slice(-8),customer:{name:user.name,cedula:user.cedula,phone:user.phone,email:user.email,address:user.address},items,days,eventDate:$('eventDate').value,returnDate:$('returnDate').value,eventAddress:$('eventAddress').value,delivery:$('delivery').value,notes:$('notes').value,status:'Pendiente',transport:null,deposit:null,payment:'Sin registrar',created:new Date().toLocaleString('es-DO')};orders.unshift(order);put('orders',orders);cart={};renderCart();renderCustomer();renderAdmin();go('myorders');alert('Solicitud guardada en este navegador con estado Pendiente. No se ha enviado ningún correo real.')}
-function renderCustomer(){$('ordersCustomer').innerHTML=!user?'Las solicitudes enviadas por WhatsApp se confirman directamente con Daris Designer. El historial compartido estará disponible cuando se conecte el panel en línea.':(orders.filter(o=>o.customer.email===user.email).map(o=>`<div class="cartrow"><div><b>${esc(o.id)}</b> · ${esc(o.eventDate)}<div class="small">${esc(o.status)} · ${money(o.items.reduce((s,i)=>s+i.price*i.qty*o.days,0))} en artículos</div></div><button class="btn secondary" onclick="printOrder('${o.id}','contrato')">Imprimir solicitud</button></div>`).join('')||'Todavía no tienes pedidos de prueba.')}
-function showAdmin(){$('admin').classList.remove('hidden');renderAdmin();go('admin')}
-function renderAdmin(){renderInspiration();$('adminOrders').innerHTML=orders.length?orders.map(o=>`<div class="panel"><div class="topline"><b>${esc(o.id)} — ${esc(o.customer.name)}</b><span class="pill">${esc(o.status)}</span></div><p class="small">Evento: ${esc(o.eventDate)} · ${esc(o.days)} día(s) · ${esc(o.eventAddress)} · ${esc(o.delivery)}</p><p>${o.items.map(i=>esc(i.name)+' × '+i.qty).join(' · ')}</p><p>Artículos: <b>${money(o.items.reduce((s,i)=>s+i.price*i.qty*o.days,0))}</b></p><div class="two"><div class="field"><label>Transporte RD$</label><input id="t_${o.id}" type="number" min="0" value="${o.transport??''}" placeholder="Pendiente"></div><div class="field"><label>Garantía RD$</label><input id="g_${o.id}" type="number" min="0" value="${o.deposit??''}" placeholder="Pendiente"></div></div><div class="field"><label>Estado</label><select id="s_${o.id}">${['Pendiente','Cotizado','Aprobado','Rechazado','En preparación','Entregado','Finalizado'].map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select></div><div class="field"><label>Pago</label><select id="p_${o.id}">${['Sin registrar','Transferencia pendiente de verificar','Transferencia verificada','Efectivo recibido'].map(s=>`<option ${s===o.payment?'selected':''}>${s}</option>`).join('')}</select></div><div class="actions"><button class="btn" onclick="saveOrder('${o.id}')">Guardar cambios</button><button class="btn secondary" onclick="printOrder('${o.id}','contrato')">Contrato</button><button class="btn secondary" onclick="printOrder('${o.id}','proforma')">Proforma</button></div></div>`).join(''):'Todavía no hay solicitudes de prueba.';$('inventory').innerHTML=`<div style="overflow-x:auto"><table><tr><th>Foto</th><th>Nombre</th><th>Categoría</th><th>RD$/día</th><th>Existencias</th><th>Colores / modelos</th><th>Acciones</th></tr>${products.map(p=>`<tr><td><img src="${imageSrc(p.img)}" style="width:65px;height:65px;object-fit:cover;border-radius:9px"><input aria-label="Cambiar foto" type="file" accept="image/*" onchange="changePhoto(${p.id},this.files[0])" style="width:105px;font-size:11px"></td><td><input aria-label="Nombre" style="width:165px" id="name_${p.id}" value="${esc(p.name)}"></td><td><input aria-label="Categoría" style="width:120px" id="cat_${p.id}" value="${esc(p.category)}"></td><td><input style="width:90px" type="number" min="0" id="price_${p.id}" placeholder="Pendiente" value="${p.price??''}"></td><td><input style="width:75px" type="number" min="0" id="qty_${p.id}" placeholder="Pendiente" value="${p.qty??''}"></td><td><input aria-label="Colores o modelos" style="width:180px" id="variants_${p.id}" value="${esc((p.variants||[]).join(', '))}"></td><td><button class="btn secondary" onclick="removeProduct(${p.id})">Eliminar</button></td></tr>`).join('')}</table></div><p><button class="btn" onclick="saveInventory()">Guardar cambios</button></p>`}
-function saveInventory(){products=products.map(p=>({...p,name:$('name_'+p.id).value.trim()||p.name,category:$('cat_'+p.id).value.trim()||p.category,price:$('price_'+p.id).value===''?null:Math.max(0,Number($('price_'+p.id).value)||0),qty:$('qty_'+p.id).value===''?null:Math.max(0,Number($('qty_'+p.id).value)||0),variants:$('variants_'+p.id).value.split(',').map(x=>x.trim()).filter(Boolean)}));put('products',products);renderProducts();renderAdmin();alert('Inventario guardado localmente en este navegador.')}
-function readPhoto(file){return new Promise((resolve,reject)=>{if(!file)return resolve(null);if(!file.type.startsWith('image/'))return reject(Error('Selecciona una imagen.'));if(file.size>1300000)return reject(Error('La imagen debe pesar menos de 1.3 MB para esta demostración.'));let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('No se pudo leer la imagen'));r.readAsDataURL(file)})}
-async function changePhoto(id,file){try{let photo=await readPhoto(file);if(!photo)return;let p=products.find(x=>x.id===id);p.img=photo;put('products',products);renderProducts();renderAdmin();alert('Imagen actualizada en este navegador.')}catch(e){alert(e.message)}}
-async function createProduct(){let name=$('newName').value.trim(),category=$('newCategory').value.trim();if(!name||!category)return alert('Escribe nombre y categoría.');try{let photo=await readPhoto($('newPhoto').files[0]);products.push({id:Math.max(0,...products.map(p=>p.id))+1,name,category,price:$('newPrice').value===''?null:Math.max(0,Number($('newPrice').value)),qty:$('newQty').value===''?null:Math.max(0,Number($('newQty').value)),img:photo||'',variants:$('newVariants').value.split(',').map(x=>x.trim()).filter(Boolean)});put('products',products);renderProducts();renderAdmin();alert('Artículo agregado en este navegador.')}catch(e){alert(e.message)}}
-function removeProduct(id){if(!confirm('¿Eliminar este artículo del catálogo de prueba?'))return;products=products.filter(p=>p.id!==id);delete cart[id];put('products',products);renderProducts();renderCart();renderAdmin()}
-function saveOrder(id){let o=orders.find(x=>x.id===id),t=$('t_'+id).value,g=$('g_'+id).value,s=$('s_'+id).value;if(s==='Aprobado'&&(t===''&&o.delivery==='Entrega a domicilio (cotización)'||g===''))return alert('Para aprobar, completa el transporte (si aplica) y la garantía; utiliza 0 si corresponde.');o.transport=t===''?null:Number(t);o.deposit=g===''?null:Number(g);o.status=s;o.payment=$('p_'+id).value;put('orders',orders);renderAdmin();renderCustomer();alert('Cambios guardados solo en este navegador. No se ha enviado notificación.')}
-function printOrder(id,kind){let o=orders.find(x=>x.id===id);if(!o)return;let sub=o.items.reduce((s,i)=>s+i.price*i.qty*o.days,0);$('printDoc').innerHTML=`<h1>Daris Designer</h1><p>Alquileres y Decoraciones · RNC 130630028<br>C/ Dionisio Troncoso 58, Esq., Higüey 23000<br>829-858-7288 / 809-875-9895<br>daritzaguilamo@gmail.com · enmanueldipre5@gmail.com</p><hr><h2>${kind==='contrato'?'SOLICITUD / CONTRATO DE ALQUILER (BORRADOR)':'PRESUPUESTO / PROFORMA NO FISCAL'}</h2><p>Pedido: ${esc(o.id)} · Fecha de emisión: ${esc(o.created)} · Estado: ${esc(o.status)}</p><p><b>Cliente:</b> ${esc(o.customer.name)} · <b>Cédula:</b> ${esc(o.customer.cedula)}<br><b>Teléfono:</b> ${esc(o.customer.phone)} · <b>Correo:</b> ${esc(o.customer.email)}<br><b>Dirección:</b> ${esc(o.customer.address)}</p><p><b>Evento:</b> ${esc(o.eventDate)} · <b>Devolución:</b> ${esc(o.returnDate)} · <b>Días cobrados:</b> ${o.days}<br><b>Lugar:</b> ${esc(o.eventAddress)} · <b>Modalidad:</b> ${esc(o.delivery)}</p><table><tr><th>Artículo</th><th>Cant.</th><th>RD$/día</th><th>Importe</th></tr>${o.items.map(i=>`<tr><td>${esc(i.name)}</td><td>${i.qty}</td><td>${money(i.price)}</td><td>${money(i.qty*i.price*o.days)}</td></tr>`).join('')}</table><p><b>Subtotal artículos:</b> ${money(sub)}<br><b>Transporte:</b> ${o.transport===null?'Pendiente de cotización':money(o.transport)}<br><b>Garantía reembolsable:</b> ${o.deposit===null?'Pendiente de definir':money(o.deposit)}<br><b>Total preliminar (sin impuestos por determinar):</b> ${o.transport===null||o.deposit===null?'Pendiente':money(sub+o.transport+o.deposit)}</p><p><b>Pago:</b> ${esc(o.payment)}. Métodos permitidos: efectivo o transferencia. Cuenta corriente Banco Popular 733315626, titular Daritza Guilamo (mostrar al cliente solo si elige transferencia).</p><p><b>Condiciones:</b> Solicitud sujeta a aprobación manual de Daris Designer. Los artículos deben devolverse completos y en buen estado. La garantía se devuelve después de la inspección; cualquier retención por daño o faltante debe documentarse según lo acordado. Este documento es un borrador y no constituye comprobante fiscal válido ni sustituye un contrato revisado legalmente.</p><div class="signature"><span>_________________________<br>Firma del cliente</span><span>_________________________<br>Daris Designer</span></div>`;window.print()}
-const inspirationDefaults=['E0598BB2-44B9-4742-8CD8-227B66B60FBF.jpeg', '7389B3F1-5414-4688-A704-0780F7BF9963.jpeg', 'C3FEB361-081C-427A-905F-B47907E5FFC6.jpeg', '3CF8DB71-2E3D-4283-963A-E06D49D099E4.jpeg', '8D890AEE-C5DF-43B5-9A24-D58F5B320AC5.jpeg', '5E2ADB56-B1E1-4D7E-8747-1EB3F0E4CAF3.jpeg', 'A6FC8E0F-B5D0-457F-89A2-A8BA42E6637A(3).jpeg', 'A2B9B498-680E-4A2A-9BEC-DAEA77F0D17A.jpeg', 'D4150A65-D732-43FD-8156-633210C55F2B.jpeg', '242CE58D-9FDD-4ED5-8F70-C84BC4A7845B.jpeg', 'C3638B5C-C2E3-4D03-AF2A-451E4EE8B622(1).jpeg', 'E9F9DE6F-1565-4964-BAD9-1F48FB855477.jpeg', '7DBC9502-B896-41B8-B5F3-62A73DB0BEA3.jpeg', '6DB17B12-1497-4C41-B193-C41B081E5C61.jpeg', 'D9EE9767-2DE4-4E63-9ECE-57F3EB63C490.jpeg', '316BAAF8-2C05-4CE2-B1CB-7391F7FF3639.jpeg', '28747FD3-26AD-4D37-BFA1-41AD4526ABDE(1).jpeg', 'E3597FD9-F9C2-4967-A934-42A96AF172BC.jpeg', '5275FE98-3D4F-4514-9AA3-EBFAC98AB242.jpeg', '8A900F95-52C7-4DB8-8B83-FD0326CBB706(2).jpeg', 'IMG_5896(1).jpeg', 'B8DA27F3-8D83-4AB4-BA37-DBE7F20FCE99(2).jpeg', 'A9712AEF-4CD4-4B92-8485-016EB795472E.jpeg', '958B39C9-2CEF-4910-A125-A27A7E96D84D.jpeg', 'D500F485-C248-4340-853C-7317194D8689.jpeg', '82BCA2EE-117D-49FA-929E-6EF3BEEF2B85(1).jpeg', 'IMG_5584(1).jpeg', 'IMG_5636.jpeg', 'AF0F8750-096A-49C9-A30B-396C21E0041A.jpeg', 'IMG_5696.jpeg', '8D99FF80-F8E3-4D0A-A94F-259ADAF0E8E9.jpeg', '9D9D549B-E0AD-4FB9-A5AC-197819C6C0A3.jpeg', 'A68E85B4-C0AE-424A-A6E5-787A7817A882(1).jpeg', '0B9672AA-2CE5-46B2-B4F1-D572F15F9C3C(1).jpeg'];
-let inspiration=get('inspiration_v2',inspirationDefaults);
-if(inspiration.length===4 && ['8D99FF80-F8E3-4D0A-A94F-259ADAF0E8E9.jpeg', '9D9D549B-E0AD-4FB9-A5AC-197819C6C0A3.jpeg', 'A68E85B4-C0AE-424A-A6E5-787A7817A882(1).jpeg', '0B9672AA-2CE5-46B2-B4F1-D572F15F9C3C(1).jpeg'].every((n,i)=>inspiration[i]===n)){inspiration=[...inspirationDefaults];put('inspiration_v2',inspiration)}
-function renderInspiration(){$('inspiration').innerHTML=inspiration.map(f=>`<img loading="lazy" src="${imageSrc(f)}" alt="Inspiración Daris Designer">`).join('');$('adminInspiration').innerHTML=inspiration.map((f,i)=>`<div class="card"><img src="${imageSrc(f)}" alt="Inspiración"><div class="content"><button class="btn secondary" onclick="removeInspiration(${i})">Eliminar foto</button></div></div>`).join('')}
-function removeInspiration(i){if(!confirm('¿Quitar esta fotografía de inspiración?'))return;inspiration.splice(i,1);put('inspiration_v2',inspiration);renderInspiration()}
-async function addInspiration(file){try{let img=await readPhoto(file);if(!img)return;inspiration.push(img);put('inspiration_v2',inspiration);renderInspiration()}catch(e){alert(e.message)}}
-renderInspiration();renderProducts();renderCart();renderSession();
-</script></body></html>
+<header>
+<div class="bar">
+  <div class="brand">Daris Designer<small>EVENTOS & DECORACIONES</small></div>
+  <div class="nav">
+    <button class="btn secondary" onclick="go('catalogo')">Catálogo</button>
+    <button class="btn secondary" onclick="go('carrito')">Mi pedido <span id="count">0</span></button>
+    <button class="btn secondary" onclick="openAdminLogin()">Administración</button>
+    <button class="btn" onclick="go('carrito')">Solicitar por WhatsApp</button>
+  </div>
+</div>
+</header>
+
+<section class="hero">
+<div class="inner">
+  <span style="letter-spacing:3px;color:#f3dba8">CELEBRACIONES CON ESTILO</span>
+  <h1>Detalles que hacen inolvidable tu evento</h1>
+  <p>Alquila pedestales, bases, accesorios y decoración para tus momentos especiales. Explora el catálogo y solicita tu alquiler en línea.</p>
+  <button class="btn gold" onclick="go('catalogo')">Explorar artículos →</button>
+</div>
+</section>
+
+<main>
+<section class="container" id="catalogo">
+  <h2>Catálogo de alquileres</h2>
+  <p class="sub">Precios en pesos dominicanos por 1 día. Toda solicitud está sujeta a disponibilidad y aprobación manual.</p>
+  <div class="field" style="max-width:420px">
+    <label>Buscar artículos</label>
+    <input id="searchProducts" placeholder="Escribe un producto, categoría o color" oninput="renderProducts()">
+  </div>
+  <div id="loadStatus" class="status">Cargando catálogo…</div>
+  <div id="products" class="grid"></div>
+  <div class="notice">Las imágenes de montajes muestran ejemplos de decoración. Confirma el artículo exacto, color y disponibilidad antes de alquilar.</div>
+</section>
+
+<section class="container" id="carrito">
+  <h2>Mi solicitud de alquiler</h2>
+  <p class="sub">Selecciona artículos y envía tu solicitud por WhatsApp. Ninguna solicitud queda aprobada automáticamente.</p>
+  <div class="panel">
+    <div id="cartItems"></div>
+    <div class="total" id="subtotal"></div>
+    <div class="notice">Subtotal de artículos solamente. Transporte, garantía e impuestos aplicables se determinarán antes de la confirmación.</div>
+    <div class="two">
+      <div class="field"><label>Fecha del evento</label><input type="date" id="eventDate"></div>
+      <div class="field"><label>Fecha de devolución</label><input type="date" id="returnDate"></div>
+      <div class="field"><label>Entrega o recogida</label><select id="delivery"><option value="Entrega a domicilio">Entrega a domicilio (cotización)</option><option value="Recogida acordada">Recogida acordada</option></select></div>
+      <div class="field"><label>Dirección del evento</label><input id="eventAddress" placeholder="Sector, calle, número y municipio"></div>
+    </div>
+    <div class="field"><label>Detalles adicionales</label><textarea id="notes" placeholder="Horario, indicaciones, decoración deseada..."></textarea></div>
+    <div class="two">
+      <div class="field"><label>Tu nombre</label><input id="clientName" placeholder="Nombre para la solicitud"></div>
+      <div class="field"><label>Teléfono de contacto</label><input id="clientPhone" placeholder="Tu número"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="sendWhatsApp('18298587288')">Enviar a WhatsApp 829-858-7288</button>
+      <button class="btn secondary" onclick="sendWhatsApp('18098759895')">Enviar a WhatsApp 809-875-9895</button>
+    </div>
+    <p class="small">WhatsApp abrirá un mensaje listo para enviar. Debes pulsar Enviar allí. La solicitud requiere confirmación manual.</p>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Inspiración para tus eventos</h2>
+  <p class="sub">Ideas y artículos decorativos. Consulta disponibilidad y opciones para tu evento.</p>
+  <div class="gallery" id="inspiration"></div>
+</section>
+
+<section class="container hidden" id="admin">
+  <div class="topline">
+    <div><h2>Administración</h2><p class="sub">Cambios guardados directamente en Supabase.</p></div>
+    <button class="btn secondary" onclick="adminLogout()">Cerrar sesión</button>
+  </div>
+  <div id="adminMessage"></div>
+
+  <div class="panel">
+    <h3>Agregar producto</h3>
+    <div class="two">
+      <div class="field"><label>Nombre</label><input id="newName"></div>
+      <div class="field"><label>Categoría</label><input id="newCategory"></div>
+      <div class="field"><label>Precio por día (RD$)</label><input type="number" min="0" id="newPrice" placeholder="Vacío = por definir"></div>
+      <div class="field"><label>Existencias</label><input type="number" min="0" id="newQty" placeholder="Vacío = por confirmar"></div>
+    </div>
+    <div class="field"><label>Colores / modelos (separados por coma)</label><input id="newColors" placeholder="Ej. blanco, rosa, dorado"></div>
+    <div class="field"><label>Fotografía</label><input type="file" accept="image/*" id="newPhoto"></div>
+    <div class="switchline"><input type="checkbox" id="newActive" checked><label for="newActive">Producto activo y visible al público</label></div>
+    <p class="small">Las fotos nuevas se comprimen y guardan en la base de datos. Usa imágenes razonables; el sistema limita el tamaño.</p>
+    <p><button class="btn" onclick="adminCreateProduct()">Agregar producto</button></p>
+  </div>
+
+  <div class="panel">
+    <h3>Inventario, precios y productos</h3>
+    <div id="adminInventory" style="overflow-x:auto"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+<div class="inner">
+  <strong style="font:26px Georgia,serif">Daris Designer</strong>
+  <div>RNC: 130630028</div>
+  <div>C/ Dionisio Troncoso 58, Esq., Higüey 23000, República Dominicana</div>
+  <div>829-858-7288 · 809-875-9895</div>
+  <div>daritzaguilamo@gmail.com · enmanueldipre5@gmail.com</div>
+  <div class="small" style="color:#f1dbe5">Las solicitudes se envían manualmente por WhatsApp; no se reciben pagos ni se envían correos automáticos.</div>
+</div>
+</footer>
+
+<div id="adminLoginModal" class="modal hidden">
+  <div class="modalbox">
+    <div class="topline"><h2>Acceso administrativo</h2><button class="link" onclick="closeAdminLogin()">Cerrar ✕</button></div>
+    <div class="notice">Acceso protegido por Supabase. Solo el administrador autorizado puede modificar productos.</div>
+    <div class="field"><label>Correo</label><input type="email" id="adminEmail" value="enmanueldipre5@gmail.com"></div>
+    <div class="field"><label>Contraseña</label><input type="password" id="adminPassword"></div>
+    <button class="btn" onclick="adminLogin()">Entrar</button>
+    <div id="loginMessage" class="small" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_BASE="https://eurzldtgjwzvkvtlxcdq.supabase.co";
+const SUPABASE_REST="https://eurzldtgjwzvkvtlxcdq.supabase.co/rest/v1/";
+const SUPABASE_KEY="sb_publishable_myrt_gYwkMygqSfOZTLl2A_g8WeoEBi";
+const ADMIN_EMAIL="enmanueldipre5@gmail.com";
+
+const $=id=>document.getElementById(id);
+const money=n=>'RD$ '+Number(n).toLocaleString('en-US');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const go=id=>$(id).scrollIntoView({behavior:'smooth'});
+let products=[];
+let cart={};
+let adminToken=localStorage.getItem('daris_admin_token')||'';
+
+function imageSrc(s){
+  if(!s)return '';
+  if(/^https?:\/\//i.test(s)||s.startsWith('data:image/')||s.startsWith('assets/'))return s;
+  return 'assets/'+encodeURIComponent(s);
+}
+function parseVariants(value){return value?String(value).split(',').map(v=>v.trim()).filter(Boolean):[]}
+
+async function publicFetchProducts(){
+  const status=$('loadStatus');
+  try{
+    const r=await fetch(SUPABASE_REST+'productos?select=id,nombre,categoria,precio_dia,colores,foto_url,activo,existencias&activo=eq.true&order=id.asc',{
+      headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}
+    });
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const rows=await r.json();
+    products=rows.map(mapRow);
+    status.textContent=products.length+' artículos disponibles';
+    renderProducts();renderCart();
+  }catch(e){
+    console.error(e);
+    status.className='notice error';
+    status.textContent='No se pudo cargar el catálogo. Actualiza la página en unos segundos.';
+  }
+}
+function mapRow(r){
+  return {id:Number(r.id),name:r.nombre||'Artículo',category:r.categoria||'Sin categoría',
+    price:r.precio_dia===null?null:Number(r.precio_dia),qty:r.existencias===null?null:Number(r.existencias),
+    img:r.foto_url||'',variants:parseVariants(r.colores),active:r.activo!==false};
+}
+function renderProducts(){
+  const term=($('searchProducts')?.value||'').toLowerCase().trim();
+  const list=products.filter(p=>(p.name+' '+p.category+' '+p.variants.join(' ')).toLowerCase().includes(term));
+  $('products').innerHTML=list.map(p=>`<article class="card">
+    <img loading="lazy" src="${esc(imageSrc(p.img))}" alt="${esc(p.name)}" onerror="this.style.display='none'">
+    <div class="content"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3>
+    <div class="price">${p.price===null?'Precio por definir':money(p.price)} <span class="small">/ día</span></div>
+    <p class="small">${p.qty===null?'Existencia por confirmar':`Existencias registradas: ${p.qty}`}</p>
+    <div class="field"><label>Color / modelo</label><select id="variant_${p.id}">${(p.variants.length?p.variants:['Por confirmar']).map(v=>`<option>${esc(v)}</option>`).join('')}</select></div>
+    <div class="foot"><span class="small">Disponibilidad por confirmar</span><button class="btn" onclick="add(${p.id})">Agregar +</button></div></div>
+  </article>`).join('');
+  if(!list.length&&products.length)$('products').innerHTML='<div class="notice">No encontramos artículos con esa búsqueda.</div>';
+}
+function add(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  const variant=$('variant_'+id)?.value||'Por confirmar';
+  const key=id+'|'+variant;const next=(cart[key]||0)+1;
+  if(p.qty!==null&&next>p.qty)return alert('La cantidad solicitada supera las existencias registradas.');
+  cart[key]=next;renderCart();
+}
+function renderCart(){
+  const entries=Object.entries(cart).filter(([,q])=>q>0);
+  const sum=entries.reduce((s,[key,q])=>{const p=products.find(x=>x.id===Number(key.split('|')[0]));return s+(p?.price||0)*q},0);
+  $('count').textContent=entries.reduce((s,[,q])=>s+q,0);
+  $('cartItems').innerHTML=entries.length?entries.map(([key,q])=>{
+    const id=Number(key.split('|')[0]),variant=key.split('|').slice(1).join('|'),p=products.find(x=>x.id===id);if(!p)return '';
+    return `<div class="cartrow"><div><b>${esc(p.name)}</b><div class="small">${esc(variant)} · ${p.price===null?'Precio por definir':money(p.price)+'/día'}</div></div>
+    <div><input type="number" min="0" ${p.qty!==null?`max="${p.qty}"`:''} value="${q}" onchange="setQty('${esc(key)}',this.value)">
+    <button class="btn secondary" style="padding:7px 10px" onclick="setQty('${esc(key)}',0)">Quitar</button></div></div>`;
+  }).join(''):'Tu carrito está vacío. Agrega artículos desde el catálogo.';
+  $('subtotal').textContent='Subtotal orientativo por día: '+money(sum);
+}
+function setQty(key,v){
+  const id=Number(key.split('|')[0]),p=products.find(x=>x.id===id);let n=Math.max(0,Math.floor(Number(v)||0));
+  if(p?.qty!==null&&n>p.qty)n=p.qty;if(n)cart[key]=n;else delete cart[key];renderCart();
+}
+function sendWhatsApp(number){
+  const entries=Object.entries(cart).filter(([,q])=>q>0);if(!entries.length)return alert('Agrega al menos un artículo.');
+  const name=$('clientName').value.trim(),phone=$('clientPhone').value.trim();
+  if(!name||!phone)return alert('Escribe tu nombre y teléfono.');
+  if(!$('eventDate').value||!$('returnDate').value||!$('eventAddress').value.trim())return alert('Completa las fechas y dirección del evento.');
+  if($('returnDate').value<$('eventDate').value)return alert('Revisa las fechas.');
+  const lines=entries.map(([key,q])=>{const p=products.find(x=>x.id===Number(key.split('|')[0])),variant=key.split('|').slice(1).join('|');
+    return '- '+p.name+' | '+variant+' | cantidad '+q+' | '+(p.price===null?'precio por confirmar':money(p.price)+'/día')});
+  const msg=['Hola, Daris Designer. Solicito cotización de alquiler (pendiente de aprobación).','Nombre: '+name,'Teléfono: '+phone,
+    'Evento: '+$('eventDate').value,'Devolución: '+$('returnDate').value,'Modalidad: '+$('delivery').value,'Dirección: '+$('eventAddress').value,
+    'Artículos:',...lines,'Notas: '+$('notes').value,'Favor confirmar colores, existencias, precio final y aprobación.'].join('\n');
+  window.open('https://wa.me/'+number+'?text='+encodeURIComponent(msg),'_blank','noopener');
+}
+
+/* ADMIN */
+function openAdminLogin(){
+  if(adminToken){showAdminPanel();return}
+  $('adminLoginModal').classList.remove('hidden');
+}
+function closeAdminLogin(){$('adminLoginModal').classList.add('hidden')}
+async function adminLogin(){
+  const email=$('adminEmail').value.trim().toLowerCase(),password=$('adminPassword').value;
+  $('loginMessage').textContent='Entrando…';
+  try{
+    const r=await fetch(SUPABASE_BASE+'/auth/v1/token?grant_type=password',{
+      method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({email,password})
+    });
+    const data=await r.json();
+    if(!r.ok)throw new Error(data?.msg||data?.error_description||'No se pudo iniciar sesión');
+    if(email!==ADMIN_EMAIL)throw new Error('Este usuario no está autorizado como administrador.');
+    adminToken=data.access_token;
+    localStorage.setItem('daris_admin_token',adminToken);
+    closeAdminLogin();$('adminPassword').value='';await showAdminPanel();
+  }catch(e){$('loginMessage').textContent=e.message}
+}
+async function showAdminPanel(){
+  $('admin').classList.remove('hidden');go('admin');await adminLoadProducts();
+}
+function adminLogout(){
+  adminToken='';localStorage.removeItem('daris_admin_token');$('admin').classList.add('hidden');
+  alert('Sesión administrativa cerrada.');
+}
+async function adminRequest(path,options={}){
+  if(!adminToken)throw new Error('Inicia sesión nuevamente.');
+  const headers={apikey:SUPABASE_KEY,Authorization:'Bearer '+adminToken,'Content-Type':'application/json',...(options.headers||{})};
+  const r=await fetch(SUPABASE_REST+path,{...options,headers});
+  if(r.status===401||r.status===403){adminLogout();throw new Error('La sesión expiró o no tiene permiso.')}
+  if(!r.ok){let txt=await r.text();throw new Error(txt||('HTTP '+r.status))}
+  if(r.status===204)return null;
+  const text=await r.text();return text?JSON.parse(text):null;
+}
+async function adminLoadProducts(){
+  setAdminMessage('Cargando inventario…');
+  try{
+    const rows=await adminRequest('productos?select=id,nombre,categoria,precio_dia,colores,foto_url,activo,existencias&order=id.asc');
+    renderAdminInventory(rows.map(mapRow));setAdminMessage('');
+  }catch(e){setAdminMessage(e.message,'error')}
+}
+function setAdminMessage(msg,type=''){
+  $('adminMessage').innerHTML=msg?`<div class="notice ${type==='error'?'error':type==='success'?'success':''}">${esc(msg)}</div>`:'';
+}
+function renderAdminInventory(rows){
+  $('adminInventory').innerHTML=`<table><tr><th>Foto</th><th>Nombre / categoría</th><th>Precio / exist.</th><th>Colores</th><th>Activo</th><th>Acciones</th></tr>
+  ${rows.map(p=>`<tr>
+    <td><img class="admin-photo" src="${esc(imageSrc(p.img))}" onerror="this.style.display='none'"><br><input type="file" accept="image/*" id="photo_${p.id}" style="width:145px"></td>
+    <td><input id="name_${p.id}" value="${esc(p.name)}" style="width:190px"><br><input id="cat_${p.id}" value="${esc(p.category)}" style="width:190px;margin-top:6px"></td>
+    <td><input type="number" min="0" id="price_${p.id}" value="${p.price??''}" placeholder="Precio" style="width:105px"><br><input type="number" min="0" id="qty_${p.id}" value="${p.qty??''}" placeholder="Existencias" style="width:105px;margin-top:6px"></td>
+    <td><input id="colors_${p.id}" value="${esc(p.variants.join(', '))}" style="width:180px"></td>
+    <td><input type="checkbox" id="active_${p.id}" ${p.active?'checked':''}></td>
+    <td><div class="actions"><button class="btn secondary" onclick="adminSaveProduct(${p.id},'${esc(p.img).replace(/'/g,'&#39;')}')">Guardar</button>
+    <button class="btn danger" onclick="adminDeleteProduct(${p.id})">Eliminar</button></div></td>
+  </tr>`).join('')}</table>`;
+}
+async function fileToCompressedDataURL(file){
+  if(!file)return null;
+  if(!file.type.startsWith('image/'))throw new Error('Selecciona una imagen válida.');
+  if(file.size>8*1024*1024)throw new Error('La imagen es demasiado grande.');
+  const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('No se pudo leer la imagen'));r.readAsDataURL(file)});
+  const img=await new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(new Error('No se pudo procesar la imagen'));i.src=data});
+  const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height)),w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);
+  const out=canvas.toDataURL('image/jpeg',0.78);
+  if(out.length>1200000)throw new Error('La foto aún queda demasiado pesada. Usa una imagen más pequeña.');
+  return out;
+}
+async function adminSaveProduct(id,currentImg){
+  setAdminMessage('Guardando…');
+  try{
+    let foto=currentImg||'';
+    const f=$('photo_'+id).files[0];if(f)foto=await fileToCompressedDataURL(f);
+    const body={
+      nombre:$('name_'+id).value.trim(),categoria:$('cat_'+id).value.trim(),
+      precio_dia:$('price_'+id).value===''?null:Number($('price_'+id).value),
+      existencias:$('qty_'+id).value===''?null:Number($('qty_'+id).value),
+      colores:$('colors_'+id).value.trim(),activo:$('active_'+id).checked,foto_url:foto
+    };
+    await adminRequest('productos?id=eq.'+id,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+    setAdminMessage('Producto actualizado.','success');await adminLoadProducts();await publicFetchProducts();
+  }catch(e){setAdminMessage(e.message,'error')}
+}
+async function adminCreateProduct(){
+  setAdminMessage('Creando producto…');
+  try{
+    const name=$('newName').value.trim(),cat=$('newCategory').value.trim();
+    if(!name||!cat)throw new Error('Escribe nombre y categoría.');
+    const foto=await fileToCompressedDataURL($('newPhoto').files[0]);
+    const body={nombre:name,categoria:cat,precio_dia:$('newPrice').value===''?null:Number($('newPrice').value),
+      existencias:$('newQty').value===''?null:Number($('newQty').value),colores:$('newColors').value.trim(),
+      foto_url:foto||'',activo:$('newActive').checked};
+    await adminRequest('productos',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+    ['newName','newCategory','newPrice','newQty','newColors'].forEach(id=>$(id).value='');$('newPhoto').value='';$('newActive').checked=true;
+    setAdminMessage('Producto agregado.','success');await adminLoadProducts();await publicFetchProducts();
+  }catch(e){setAdminMessage(e.message,'error')}
+}
+async function adminDeleteProduct(id){
+  if(!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.'))return;
+  setAdminMessage('Eliminando…');
+  try{await adminRequest('productos?id=eq.'+id,{method:'DELETE',headers:{Prefer:'return=minimal'}});setAdminMessage('Producto eliminado.','success');await adminLoadProducts();await publicFetchProducts()}
+  catch(e){setAdminMessage(e.message,'error')}
+}
+
+const inspiration=[
+'E0598BB2-44B9-4742-8CD8-227B66B60FBF.jpeg','7389B3F1-5414-4688-A704-0780F7BF9963.jpeg','C3FEB361-081C-427A-905F-B47907E5FFC6.jpeg',
+'3CF8DB71-2E3D-4283-963A-E06D49D099E4.jpeg','8D890AEE-C5DF-43B5-9A24-D58F5B320AC5.jpeg','5E2ADB56-B1E1-4D7E-8747-1EB3F0E4CAF3.jpeg',
+'A6FC8E0F-B5D0-457F-89A2-A8BA42E6637A(3).jpeg','A2B9B498-680E-4A2A-9BEC-DAEA77F0D17A.jpeg','D4150A65-D732-43FD-8156-633210C55F2B.jpeg',
+'242CE58D-9FDD-4ED5-8F70-C84BC4A7845B.jpeg','E9F9DE6F-1565-4964-BAD9-1F48FB855477.jpeg','7DBC9502-B896-41B8-B5F3-62A73DB0BEA3.jpeg'];
+$('inspiration').innerHTML=inspiration.map(n=>`<img loading="lazy" src="${imageSrc(n)}" alt="Inspiración Daris Designer">`).join('');
+renderCart();publicFetchProducts();
+</script>
+</body>
+</html>
