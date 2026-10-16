@@ -157,6 +157,15 @@ th{background:var(--pink)}
   </div>
 
   <div class="panel">
+    <h3>Fotos de inspiración</h3>
+    <p class="small">Agrega fotografías o elimina las existentes. Los cambios serán visibles para todos.</p>
+    <div class="field"><label>Seleccionar fotografía</label><input type="file" accept="image/*" id="inspirationNewPhoto"></div>
+    <button class="btn" onclick="adminAddInspiration()">Agregar foto de inspiración</button>
+    <div id="adminInspirationMessage" class="status" role="status"></div>
+    <div id="adminInspiration" class="grid" style="margin-top:18px"></div>
+  </div>
+
+  <div class="panel">
     <h3>Inventario, precios y productos</h3>
     <div id="adminInventory" style="overflow-x:auto"></div>
   </div>
@@ -301,7 +310,7 @@ async function adminLogin(){
   }catch(e){$('loginMessage').textContent=e.message}
 }
 async function showAdminPanel(){
-  $('admin').classList.remove('hidden');go('admin');await adminLoadProducts();
+  $('admin').classList.remove('hidden');go('admin');await Promise.all([adminLoadProducts(),loadInspiration()]);
 }
 function adminLogout(){
   adminToken='';localStorage.removeItem('daris_admin_token');$('admin').classList.add('hidden');
@@ -386,12 +395,46 @@ async function adminDeleteProduct(id){
   catch(e){setAdminMessage(e.message,'error')}
 }
 
-const inspiration=[
-'E0598BB2-44B9-4742-8CD8-227B66B60FBF.jpeg','7389B3F1-5414-4688-A704-0780F7BF9963.jpeg','C3FEB361-081C-427A-905F-B47907E5FFC6.jpeg',
-'3CF8DB71-2E3D-4283-963A-E06D49D099E4.jpeg','8D890AEE-C5DF-43B5-9A24-D58F5B320AC5.jpeg','5E2ADB56-B1E1-4D7E-8747-1EB3F0E4CAF3.jpeg',
-'A6FC8E0F-B5D0-457F-89A2-A8BA42E6637A(3).jpeg','A2B9B498-680E-4A2A-9BEC-DAEA77F0D17A.jpeg','D4150A65-D732-43FD-8156-633210C55F2B.jpeg',
-'242CE58D-9FDD-4ED5-8F70-C84BC4A7845B.jpeg','E9F9DE6F-1565-4964-BAD9-1F48FB855477.jpeg','7DBC9502-B896-41B8-B5F3-62A73DB0BEA3.jpeg'];
-$('inspiration').innerHTML=inspiration.map(n=>`<img loading="lazy" src="${imageSrc(n)}" alt="Inspiración Daris Designer">`).join('');
+async function loadInspiration(){
+  try{
+    const r=await fetch(SUPABASE_REST+'inspiracion?select=id,foto_url&order=id.asc',{
+      headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}
+    });
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const rows=await r.json();
+    $('inspiration').innerHTML=rows.map(p=>`<img loading="lazy" src="${esc(imageSrc(p.foto_url))}" alt="Inspiración Daris Designer" onerror="this.style.display='none'">`).join('');
+    if(!rows.length)$('inspiration').innerHTML='<p class="small">Próximamente, ideas para tus eventos.</p>';
+    if(adminToken){
+      $('adminInspiration').innerHTML=rows.map(p=>`<div class="card"><img src="${esc(imageSrc(p.foto_url))}" alt="Foto de inspiración"><div class="content"><button class="btn danger" onclick="adminDeleteInspiration(${Number(p.id)})">Eliminar foto</button></div></div>`).join('')||'<p class="small">Todavía no hay fotos.</p>';
+    }
+  }catch(e){
+    console.error('Inspiración:',e);
+    $('inspiration').innerHTML='<p class="small">No se pudieron cargar las fotos. Intenta actualizar la página.</p>';
+    if(adminToken)$('adminInspirationMessage').textContent='Error al cargar fotos: '+e.message;
+  }
+}
+async function adminAddInspiration(){
+  const msg=$('adminInspirationMessage');msg.textContent='Subiendo foto…';
+  try{
+    const f=$('inspirationNewPhoto').files[0];
+    if(!f)throw new Error('Selecciona una fotografía primero.');
+    const foto=await fileToCompressedDataURL(f);
+    await adminRequest('inspiracion',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({foto_url:foto})});
+    $('inspirationNewPhoto').value='';
+    msg.textContent='Foto agregada correctamente.';
+    await loadInspiration();
+  }catch(e){msg.textContent='No se pudo agregar: '+e.message}
+}
+async function adminDeleteInspiration(id){
+  if(!confirm('¿Eliminar esta foto de inspiración?'))return;
+  const msg=$('adminInspirationMessage');msg.textContent='Eliminando foto…';
+  try{
+    await adminRequest('inspiracion?id=eq.'+id,{method:'DELETE',headers:{Prefer:'return=minimal'}});
+    msg.textContent='Foto eliminada correctamente.';
+    await loadInspiration();
+  }catch(e){msg.textContent='No se pudo eliminar: '+e.message}
+}
+loadInspiration();
 renderCart();publicFetchProducts();
 </script>
 </body>
