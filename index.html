@@ -28,7 +28,7 @@ h2{font:32px Georgia,serif;color:#74344e;margin:0 0 10px}
 .sub{color:var(--muted);margin:0 0 22px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}
 .card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 25px #5a27300c}
-.card img{height:260px;width:100%;object-fit:contain;background:#fff}
+.card img{height:220px;width:100%;object-fit:contain;background:#f7f2f4;cursor:zoom-in}
 .card .content{padding:16px}
 .card h3{font-size:17px;margin:0 0 9px}
 .price{color:var(--rose);font-weight:800;font-size:20px}
@@ -54,16 +54,18 @@ th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px;font-size
 th{background:var(--pink)}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.gallery img{width:100%;height:185px;object-fit:cover;border-radius:12px}
+.gallery img{width:100%;height:210px;object-fit:contain;background:#f7f2f4;border-radius:12px;cursor:zoom-in}
 .small{font-size:12px;color:var(--muted)}
 .modal{position:fixed;inset:0;background:#24171cb5;display:grid;place-items:center;z-index:10;padding:20px}
 .modalbox{background:white;border-radius:20px;padding:25px;width:min(540px,100%);max-height:90vh;overflow:auto}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .link{background:none;border:0;color:var(--rose);text-decoration:underline}
-.admin-photo{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#f4ecef}
+.admin-photo{width:72px;height:72px;object-fit:contain;border-radius:10px;background:#f4ecef}
 .switchline{display:flex;gap:8px;align-items:center}
 .status{margin:10px 0;color:var(--muted);font-size:14px}
-@media(max-width:650px){.bar{align-items:flex-start;flex-direction:column}.hero{min-height:330px}.two{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:150px}.container{padding:24px 15px}.brand{font-size:24px}table{min-width:900px}}
+@media(max-width:650px){.bar{align-items:flex-start;flex-direction:column}.hero{min-height:330px}.two{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:190px}.container{padding:24px 15px}.brand{font-size:24px}table{min-width:900px}}
+/* Opciones de tamaños */
+.size-list{display:grid;gap:7px;margin:12px 0}.size-line{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:10px}.size-line .size-name{flex:1;font-size:13px}.size-line input[type=number]{width:62px;padding:6px;border:1px solid #d9cbd0;border-radius:7px}.size-line input[type=checkbox]{width:18px;height:18px;flex:none}.size-line.unavailable{opacity:.48}.size-line .small{display:block}.size-form{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.size-form .field{min-width:0}.size-admin-row{display:grid;grid-template-columns:1.6fr 1fr 1fr auto auto auto;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:10px 0}.size-admin-row input[type=text],.size-admin-row input[type=number]{width:100%;min-width:0;padding:8px;border:1px solid #d9cbd0;border-radius:7px}.zoom-overlay{position:fixed;inset:0;background:#000d;z-index:30;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}.zoom-overlay img{max-width:96vw;max-height:90vh;object-fit:contain}.zoom-close{position:absolute;top:12px;right:15px;background:white;color:#333;border:0;border-radius:30px;padding:9px 14px;font-size:20px}@media(max-width:650px){.size-admin-row{grid-template-columns:1fr 1fr;gap:7px}.size-form{grid-template-columns:1fr 1fr}.size-form .field:first-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -157,6 +159,22 @@ th{background:var(--pink)}
   </div>
 
   <div class="panel">
+    <h3>Tamaños, precios y combos</h3>
+    <p class="small">Selecciona un producto para configurar sus tamaños. Si todavía no tiene tamaños, seguirá usando su precio y existencias actuales. Los combos se gestionan como una opción con precio y existencias propios.</p>
+    <div class="field"><label>Producto</label><select id="sizeProductSelect" onchange="renderAdminSizes()"></select></div>
+    <div id="sizeAdminList"></div>
+    <h4>Agregar tamaño o combo</h4>
+    <div class="size-form">
+      <div class="field"><label>Nombre</label><input id="sizeNewName" placeholder="Grande, Mediano, Combo de 3..."></div>
+      <div class="field"><label>Precio por día (RD$)</label><input id="sizeNewPrice" type="number" min="0" step="0.01" placeholder="Por definir"></div>
+      <div class="field"><label>Existencias</label><input id="sizeNewQty" type="number" min="0" step="1" placeholder="Por confirmar"></div>
+    </div>
+    <div class="switchline"><input type="checkbox" id="sizeNewCombo"><label for="sizeNewCombo">Es un combo con precio especial</label></div>
+    <p><button class="btn" onclick="adminCreateSize()">Agregar tamaño / combo</button></p>
+    <div id="sizeAdminMessage" class="status" role="status"></div>
+  </div>
+
+  <div class="panel">
     <h3>Fotos de inspiración</h3>
     <p class="small">Agrega fotografías o elimina las existentes. Los cambios serán visibles para todos.</p>
     <div class="field"><label>Seleccionar fotografía</label><input type="file" accept="image/*" id="inspirationNewPhoto"></div>
@@ -205,6 +223,8 @@ const money=n=>'RD$ '+Number(n).toLocaleString('en-US');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const go=id=>$(id).scrollIntoView({behavior:'smooth'});
 let products=[];
+let sizes=[];
+let adminProducts=[];
 let cart={};
 let adminToken=localStorage.getItem('daris_admin_token')||'';
 
@@ -218,20 +238,28 @@ function parseVariants(value){return value?String(value).split(',').map(v=>v.tri
 async function publicFetchProducts(){
   const status=$('loadStatus');
   try{
-    const r=await fetch(SUPABASE_REST+'productos?select=id,nombre,categoria,precio_dia,colores,foto_url,activo,existencias&activo=eq.true&order=id.asc',{
-      headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}
-    });
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const rows=await r.json();
-    products=rows.map(mapRow);
+    const [rp,rs]=await Promise.all([
+      fetch(SUPABASE_REST+'productos?select=id,nombre,categoria,precio_dia,colores,foto_url,activo,existencias&activo=eq.true&order=id.asc',{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}}),
+      fetch(SUPABASE_REST+'producto_tamanos?select=id,producto_id,nombre,precio_dia,existencias,activo,es_combo&activo=eq.true&order=id.asc',{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}})
+    ]);
+    if(!rp.ok)throw new Error('Productos HTTP '+rp.status);
+    if(!rs.ok)throw new Error('Tamaños HTTP '+rs.status);
+    products=(await rp.json()).map(mapRow);
+    sizes=(await rs.json()).map(mapSize);
     status.textContent=products.length+' artículos disponibles';
     renderProducts();renderCart();
   }catch(e){
-    console.error(e);
-    status.className='notice error';
+    console.error(e);status.className='notice error';
     status.textContent='No se pudo cargar el catálogo. Actualiza la página en unos segundos.';
   }
 }
+function mapSize(r){return {id:Number(r.id),productId:Number(r.producto_id),name:r.nombre||'Tamaño',price:r.precio_dia==null?null:Number(r.precio_dia),qty:r.existencias==null?null:Number(r.existencias),active:r.activo!==false,combo:!!r.es_combo}}
+function sizesOf(id){return sizes.filter(v=>v.productId===id&&v.active)}
+function priceText(v){return v.price===null?'Precio por definir':money(v.price)}
+function productSizeOptions(p){const opts=sizesOf(p.id);return opts.length?opts:[{id:0,productId:p.id,name:'Único',price:p.price,qty:p.qty,combo:false}]}
+function zoomPhoto(src){if(!src)return;const div=document.createElement('div');div.className='zoom-overlay';div.setAttribute('role','dialog');div.setAttribute('aria-label','Fotografía ampliada');div.innerHTML='<button class="zoom-close" aria-label="Cerrar fotografía">✕</button><img alt="Fotografía ampliada">';div.querySelector('img').src=src;div.onclick=()=>div.remove();document.body.appendChild(div)}
+document.addEventListener('click',e=>{const img=e.target.closest('#products .card>img,#inspiration>img');if(img)zoomPhoto(img.src)});
+
 function mapRow(r){
   return {id:Number(r.id),name:r.nombre||'Artículo',category:r.categoria||'Sin categoría',
     price:r.precio_dia===null?null:Number(r.precio_dia),qty:r.existencias===null?null:Number(r.existencias),
@@ -240,50 +268,83 @@ function mapRow(r){
 function renderProducts(){
   const term=($('searchProducts')?.value||'').toLowerCase().trim();
   const list=products.filter(p=>(p.name+' '+p.category+' '+p.variants.join(' ')).toLowerCase().includes(term));
-  $('products').innerHTML=list.map(p=>`<article class="card">
-    <img loading="lazy" src="${esc(imageSrc(p.img))}" alt="${esc(p.name)}" onerror="this.style.display='none'">
-    <div class="content"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3>
-    <div class="price">${p.price===null?'Precio por definir':money(p.price)} <span class="small">/ día</span></div>
-    <p class="small">${p.qty===null?'Existencia por confirmar':`Existencias registradas: ${p.qty}`}</p>
-    <div class="field"><label>Color / modelo</label><select id="variant_${p.id}">${(p.variants.length?p.variants:['Por confirmar']).map(v=>`<option>${esc(v)}</option>`).join('')}</select></div>
-    <div class="foot"><span class="small">Disponibilidad por confirmar</span><button class="btn" onclick="add(${p.id})">Agregar +</button></div></div>
-  </article>`).join('');
+  $('products').innerHTML=list.map(p=>{
+    const opts=productSizeOptions(p),hasSizes=sizesOf(p.id).length>0;
+    const prices=opts.map(o=>o.price).filter(v=>v!==null);
+    const priceLabel=hasSizes?(prices.length?'Desde '+money(Math.min(...prices)):'Precio por definir'):priceText({price:p.price});
+    return `<article class="card">
+      <img loading="lazy" src="${esc(imageSrc(p.img))}" alt="${esc(p.name)}" onerror="this.style.display='none'" title="Toca para ampliar">
+      <div class="content"><span class="tag">${esc(p.category)}</span><h3>${esc(p.name)}</h3>
+      <div class="price">${priceLabel} <span class="small">/ día</span></div>
+      <div class="field"><label>Color / modelo</label><select id="variant_${p.id}">${(p.variants.length?p.variants:['Por confirmar']).map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}</select></div>
+      <label style="font-size:13px;font-weight:650">${hasSizes?'Elige tamaños y cantidades':'Cantidad'}</label>
+      <div class="size-list">${opts.map(o=>{const limited=o.qty!==null&&o.qty<=0;return `<div class="size-line ${limited?'unavailable':''}">
+        <input type="checkbox" id="sizeCheck_${p.id}_${o.id}" ${limited?'disabled':''} aria-label="Seleccionar ${esc(o.name)}">
+        <label class="size-name" for="sizeCheck_${p.id}_${o.id}"><b>${esc(o.name)}${o.combo?' 🎁':''}</b><span class="small">${priceText(o)}${o.qty===null?' · Disponibilidad por confirmar':' · '+o.qty+' disponibles'}</span></label>
+        <input type="number" min="1" step="1" value="1" ${o.qty!==null?`max="${o.qty}"`:''} id="sizeQty_${p.id}_${o.id}" ${limited?'disabled':''} aria-label="Cantidad ${esc(o.name)}">
+      </div>`}).join('')}</div>
+      <button class="btn" style="width:100%" onclick="addSelections(${p.id})">Agregar selección +</button>
+      </div></article>`}).join('');
   if(!list.length&&products.length)$('products').innerHTML='<div class="notice">No encontramos artículos con esa búsqueda.</div>';
 }
-function add(id){
+function cartKey(id,sizeId,color){return [id,sizeId,encodeURIComponent(color)].join('|')}
+function cartDetail(key){
+  const [rawId,rawSize,...parts]=key.split('|');const p=products.find(x=>x.id===Number(rawId));
+  if(!p)return null;
+  const opt=productSizeOptions(p).find(o=>o.id===Number(rawSize));if(!opt)return null;
+  let color='Por confirmar';try{color=decodeURIComponent(parts.join('|'))}catch(e){}
+  return {p,opt,color};
+}
+function addSelections(id){
   const p=products.find(x=>x.id===id);if(!p)return;
-  const variant=$('variant_'+id)?.value||'Por confirmar';
-  const key=id+'|'+variant;const next=(cart[key]||0)+1;
-  if(p.qty!==null&&next>p.qty)return alert('La cantidad solicitada supera las existencias registradas.');
-  cart[key]=next;renderCart();
+  const color=$('variant_'+id)?.value||'Por confirmar';let added=0;
+  for(const o of productSizeOptions(p)){
+    if(!$('sizeCheck_'+id+'_'+o.id)?.checked)continue;
+    const input=$('sizeQty_'+id+'_'+o.id);
+    const q=Number(input?.value);
+    if(!Number.isSafeInteger(q)||q<1)return alert('Escribe una cantidad válida para '+o.name+'.');
+    const key=cartKey(id,o.id,color),current=cart[key]||0;
+    const allReserved=Object.entries(cart).reduce((n,[k,num])=>{const d=cartDetail(k);return n+(d&&d.p.id===id&&d.opt.id===o.id?num:0)},0);
+    if(o.qty!==null&&allReserved+q>o.qty)return alert('No hay suficientes existencias de '+o.name+'.');
+    cart[key]=current+q;added+=q;
+  }
+  if(!added)return alert('Selecciona al menos un tamaño o combo.');
+  renderCart();
+  alert('Agregaste '+added+' artículo(s) a tu pedido.');
 }
 function renderCart(){
-  const entries=Object.entries(cart).filter(([,q])=>q>0);
-  const sum=entries.reduce((s,[key,q])=>{const p=products.find(x=>x.id===Number(key.split('|')[0]));return s+(p?.price||0)*q},0);
+  const entries=Object.entries(cart).filter(([k,q])=>q>0&&cartDetail(k));
+  const sum=entries.reduce((s,[key,q])=>s+(cartDetail(key).opt.price||0)*q,0);
   $('count').textContent=entries.reduce((s,[,q])=>s+q,0);
   $('cartItems').innerHTML=entries.length?entries.map(([key,q])=>{
-    const id=Number(key.split('|')[0]),variant=key.split('|').slice(1).join('|'),p=products.find(x=>x.id===id);if(!p)return '';
-    return `<div class="cartrow"><div><b>${esc(p.name)}</b><div class="small">${esc(variant)} · ${p.price===null?'Precio por definir':money(p.price)+'/día'}</div></div>
-    <div><input type="number" min="0" ${p.qty!==null?`max="${p.qty}"`:''} value="${q}" onchange="setQty('${esc(key)}',this.value)">
-    <button class="btn secondary" style="padding:7px 10px" onclick="setQty('${esc(key)}',0)">Quitar</button></div></div>`;
+    const {p,opt,color}=cartDetail(key);
+    return `<div class="cartrow"><div><b>${esc(p.name)}</b><div class="small">${esc(opt.name)}${opt.combo?' (combo)':''} · Color: ${esc(color)} · ${priceText(opt)}/día</div></div>
+      <div><input type="number" min="0" step="1" ${opt.qty!==null?`max="${opt.qty}"`:''} value="${q}" onchange="setQtyByIndex(${entries.indexOf(entries.find(([k])=>k===key))},this.value)" aria-label="Cantidad">
+      <button class="btn secondary" style="padding:7px 10px" onclick="removeCartIndex(${entries.indexOf(entries.find(([k])=>k===key))})">Quitar</button></div></div>`;
   }).join(''):'Tu carrito está vacío. Agrega artículos desde el catálogo.';
   $('subtotal').textContent='Subtotal orientativo por día: '+money(sum);
 }
-function setQty(key,v){
-  const id=Number(key.split('|')[0]),p=products.find(x=>x.id===id);let n=Math.max(0,Math.floor(Number(v)||0));
-  if(p?.qty!==null&&n>p.qty)n=p.qty;if(n)cart[key]=n;else delete cart[key];renderCart();
+function cartKeys(){return Object.entries(cart).filter(([k,q])=>q>0&&cartDetail(k)).map(([k])=>k)}
+function setQtyByIndex(index,v){
+  const key=cartKeys()[index],d=key&&cartDetail(key);if(!d)return;
+  const n=Number(v);if(!Number.isSafeInteger(n)||n<0)return alert('Escribe una cantidad válida.');
+  const already=Object.entries(cart).reduce((sum,[k,q])=>{if(k===key)return sum;const x=cartDetail(k);return sum+(x&&x.p.id===d.p.id&&x.opt.id===d.opt.id?q:0)},0);
+  if(d.opt.qty!==null&&n+already>d.opt.qty)return alert('No hay suficientes existencias de '+d.opt.name+'.');
+  if(n)cart[key]=n;else delete cart[key];renderCart();
 }
+function removeCartIndex(index){const key=cartKeys()[index];if(key)delete cart[key];renderCart()}
 function sendWhatsApp(number){
-  const entries=Object.entries(cart).filter(([,q])=>q>0);if(!entries.length)return alert('Agrega al menos un artículo.');
+  const entries=Object.entries(cart).filter(([k,q])=>q>0&&cartDetail(k));if(!entries.length)return alert('Agrega al menos un artículo.');
   const name=$('clientName').value.trim(),phone=$('clientPhone').value.trim();
   if(!name||!phone)return alert('Escribe tu nombre y teléfono.');
   if(!$('eventDate').value||!$('returnDate').value||!$('eventAddress').value.trim())return alert('Completa las fechas y dirección del evento.');
   if($('returnDate').value<$('eventDate').value)return alert('Revisa las fechas.');
-  const lines=entries.map(([key,q])=>{const p=products.find(x=>x.id===Number(key.split('|')[0])),variant=key.split('|').slice(1).join('|');
-    return '- '+p.name+' | '+variant+' | cantidad '+q+' | '+(p.price===null?'precio por confirmar':money(p.price)+'/día')});
+  const lines=entries.map(([key,q])=>{const {p,opt,color}=cartDetail(key);
+    return '- '+p.name+' | '+opt.name+(opt.combo?' (combo)':'')+' | color '+color+' | cantidad '+q+' | '+(opt.price===null?'precio por confirmar':money(opt.price)+'/día')});
+  const sum=entries.reduce((s,[key,q])=>s+(cartDetail(key).opt.price||0)*q,0);
   const msg=['Hola, Daris Designer. Solicito cotización de alquiler (pendiente de aprobación).','Nombre: '+name,'Teléfono: '+phone,
     'Evento: '+$('eventDate').value,'Devolución: '+$('returnDate').value,'Modalidad: '+$('delivery').value,'Dirección: '+$('eventAddress').value,
-    'Artículos:',...lines,'Notas: '+$('notes').value,'Favor confirmar colores, existencias, precio final y aprobación.'].join('\n');
+    'Artículos:',...lines,'Subtotal orientativo por día (excluye artículos sin precio): '+money(sum),'Notas: '+$('notes').value,'Favor confirmar colores, existencias, precio final y aprobación.'].join('\n');
   window.open('https://wa.me/'+number+'?text='+encodeURIComponent(msg),'_blank','noopener');
 }
 
@@ -310,7 +371,7 @@ async function adminLogin(){
   }catch(e){$('loginMessage').textContent=e.message}
 }
 async function showAdminPanel(){
-  $('admin').classList.remove('hidden');go('admin');await Promise.all([adminLoadProducts(),loadInspiration()]);
+  $('admin').classList.remove('hidden');go('admin');await Promise.all([adminLoadProducts(),loadInspiration(),adminLoadSizes()]);
 }
 function adminLogout(){
   adminToken='';localStorage.removeItem('daris_admin_token');$('admin').classList.add('hidden');
@@ -329,9 +390,71 @@ async function adminLoadProducts(){
   setAdminMessage('Cargando inventario…');
   try{
     const rows=await adminRequest('productos?select=id,nombre,categoria,precio_dia,colores,foto_url,activo,existencias&order=id.asc');
-    renderAdminInventory(rows.map(mapRow));setAdminMessage('');
+    adminProducts=rows.map(mapRow);renderAdminInventory(adminProducts);populateSizeProductSelect();setAdminMessage('');
   }catch(e){setAdminMessage(e.message,'error')}
 }
+async function adminLoadSizes(){
+  const m=$('sizeAdminMessage');m.textContent='Cargando tamaños…';
+  try{const rows=await adminRequest('producto_tamanos?select=id,producto_id,nombre,precio_dia,existencias,activo,es_combo&order=id.asc');
+    adminSizes=rows.map(mapSize);m.textContent='';renderAdminSizes();
+  }catch(e){m.textContent='No se pudieron cargar los tamaños: '+e.message}
+}
+let adminSizes=[];
+function populateSizeProductSelect(){
+  const sel=$('sizeProductSelect');const old=sel.value;
+  sel.innerHTML=adminProducts.map(p=>`<option value="${p.id}">${esc(p.name)} (#${p.id})</option>`).join('');
+  if(adminProducts.some(p=>String(p.id)===old))sel.value=old;
+  renderAdminSizes();
+}
+function renderAdminSizes(){
+  const id=Number($('sizeProductSelect').value);
+  const rows=adminSizes.filter(x=>x.productId===id);
+  $('sizeAdminList').innerHTML=rows.length?rows.map(o=>`<div class="size-admin-row">
+    <input type="text" id="szName_${o.id}" value="${esc(o.name)}" aria-label="Nombre del tamaño">
+    <input type="number" min="0" step="0.01" id="szPrice_${o.id}" value="${o.price??''}" placeholder="Precio" aria-label="Precio">
+    <input type="number" min="0" step="1" id="szQty_${o.id}" value="${o.qty??''}" placeholder="Existencias" aria-label="Existencias">
+    <label class="small"><input type="checkbox" id="szCombo_${o.id}" ${o.combo?'checked':''}> Combo</label>
+    <label class="small"><input type="checkbox" id="szActive_${o.id}" ${o.active?'checked':''}> Visible</label>
+    <div class="actions"><button class="btn secondary" onclick="adminSaveSize(${o.id})">Guardar</button><button class="btn danger" onclick="adminDeleteSize(${o.id})">Eliminar</button></div>
+  </div>`).join(''):'<p class="small">Este producto todavía no tiene tamaños. Sigue funcionando con el precio y existencias generales hasta que agregues uno.</p>';
+}
+function readSizeFields(prefix,id){
+  const name=$(prefix+'Name_'+id).value.trim(),rawPrice=$(prefix+'Price_'+id).value,rawQty=$(prefix+'Qty_'+id).value;
+  if(!name)throw new Error('El tamaño debe tener un nombre.');
+  if(rawPrice!==''&&(!Number.isFinite(Number(rawPrice))||Number(rawPrice)<0))throw new Error('Precio inválido.');
+  if(rawQty!==''&&(!Number.isSafeInteger(Number(rawQty))||Number(rawQty)<0))throw new Error('Existencias inválidas.');
+  return {nombre:name,precio_dia:rawPrice===''?null:Number(rawPrice),existencias:rawQty===''?null:Number(rawQty)};
+}
+async function adminCreateSize(){
+  const msg=$('sizeAdminMessage');msg.textContent='Guardando tamaño…';
+  try{
+    const productId=Number($('sizeProductSelect').value);if(!productId)throw new Error('Selecciona un producto.');
+    const name=$('sizeNewName').value.trim(),rawPrice=$('sizeNewPrice').value,rawQty=$('sizeNewQty').value;
+    if(!name)throw new Error('Escribe el nombre del tamaño o combo.');
+    if(rawPrice!==''&&(!Number.isFinite(Number(rawPrice))||Number(rawPrice)<0))throw new Error('Precio inválido.');
+    if(rawQty!==''&&(!Number.isSafeInteger(Number(rawQty))||Number(rawQty)<0))throw new Error('Existencias inválidas.');
+    const body={producto_id:productId,nombre:name,precio_dia:rawPrice===''?null:Number(rawPrice),existencias:rawQty===''?null:Number(rawQty),es_combo:$('sizeNewCombo').checked,activo:true};
+    await adminRequest('producto_tamanos',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+    ['sizeNewName','sizeNewPrice','sizeNewQty'].forEach(x=>$(x).value='');$('sizeNewCombo').checked=false;
+    await adminLoadSizes();await publicFetchProducts();msg.textContent='Tamaño agregado correctamente.';
+  }catch(e){msg.textContent='No se pudo agregar: '+e.message}
+}
+async function adminSaveSize(id){
+  const msg=$('sizeAdminMessage');msg.textContent='Guardando…';
+  try{
+    const body={...readSizeFields('sz',id),es_combo:$('szCombo_'+id).checked,activo:$('szActive_'+id).checked};
+    await adminRequest('producto_tamanos?id=eq.'+id,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+    await adminLoadSizes();await publicFetchProducts();msg.textContent='Tamaño actualizado.';
+  }catch(e){msg.textContent='Error al guardar: '+e.message}
+}
+async function adminDeleteSize(id){
+  if(!confirm('¿Eliminar este tamaño o combo? No se puede deshacer.'))return;
+  const msg=$('sizeAdminMessage');msg.textContent='Eliminando…';
+  try{await adminRequest('producto_tamanos?id=eq.'+id,{method:'DELETE',headers:{Prefer:'return=minimal'}});
+    await adminLoadSizes();await publicFetchProducts();msg.textContent='Tamaño eliminado.';
+  }catch(e){msg.textContent='Error al eliminar: '+e.message}
+}
+
 function setAdminMessage(msg,type=''){
   $('adminMessage').innerHTML=msg?`<div class="notice ${type==='error'?'error':type==='success'?'success':''}">${esc(msg)}</div>`:'';
 }
@@ -343,7 +466,7 @@ function renderAdminInventory(rows){
     <td><input type="number" min="0" id="price_${p.id}" value="${p.price??''}" placeholder="Precio" style="width:105px"><br><input type="number" min="0" id="qty_${p.id}" value="${p.qty??''}" placeholder="Existencias" style="width:105px;margin-top:6px"></td>
     <td><input id="colors_${p.id}" value="${esc(p.variants.join(', '))}" style="width:180px"></td>
     <td><input type="checkbox" id="active_${p.id}" ${p.active?'checked':''}></td>
-    <td><div class="actions"><button class="btn secondary" onclick="adminSaveProduct(${p.id},'${esc(p.img).replace(/'/g,'&#39;')}')">Guardar</button>
+    <td><div class="actions"><button class="btn secondary" onclick="adminSaveProduct(${p.id})">Guardar</button>
     <button class="btn danger" onclick="adminDeleteProduct(${p.id})">Eliminar</button></div></td>
   </tr>`).join('')}</table>`;
 }
@@ -359,10 +482,10 @@ async function fileToCompressedDataURL(file){
   if(out.length>1200000)throw new Error('La foto aún queda demasiado pesada. Usa una imagen más pequeña.');
   return out;
 }
-async function adminSaveProduct(id,currentImg){
+async function adminSaveProduct(id){
   setAdminMessage('Guardando…');
   try{
-    let foto=currentImg||'';
+    let foto=adminProducts.find(x=>x.id===id)?.img||'';
     const f=$('photo_'+id).files[0];if(f)foto=await fileToCompressedDataURL(f);
     const body={
       nombre:$('name_'+id).value.trim(),categoria:$('cat_'+id).value.trim(),
